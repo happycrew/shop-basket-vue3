@@ -7,6 +7,14 @@
   padding: 0;
 }
 
+#app {
+  min-height: 100vh;
+}
+
+html {
+  background: #eeeeee;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
