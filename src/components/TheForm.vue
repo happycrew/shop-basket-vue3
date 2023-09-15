@@ -1,9 +1,46 @@
 <template>
-  <form class="form">
-    <input type="text" class="form__input" placeholder="Input here..." />
-    <button type="button" class="form__btn form__btn--primary">Add</button>
+  <form class="form" @submit.prevent="addItem">
+    <input
+      type="text"
+      class="form__input"
+      placeholder="Input here..."
+      v-model="itemText" />
+    <button @click="addItem" type="button" class="form__btn form__btn--primary">
+      Add
+    </button>
   </form>
 </template>
+
+<script lang="ts">
+import { Item } from '@/types/types';
+import { defineComponent } from 'vue';
+
+interface State {
+  itemText: string;
+}
+
+export default defineComponent({
+  data(): State {
+    return {
+      itemText: '',
+    };
+  },
+
+  methods: {
+    addItem() {
+      this.$emit('addItem', {
+        id: Date.now().toString(),
+        text: this.itemText,
+        completed: false,
+      });
+      this.itemText = '';
+    },
+  },
+  emits: {
+    addItem: (item: Item) => item,
+  },
+});
+</script>
 
 <style lang="scss">
 @import '../assets/styles/variables.scss';

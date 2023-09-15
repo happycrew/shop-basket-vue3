@@ -1,9 +1,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import TheForm from './TheForm.vue';
+import { Item } from '@/types/types';
 export default defineComponent({
   components: {
     TheForm,
+  },
+  methods: {
+    addItem(item: Item) {
+      this.$emit('addItem', item);
+    },
+  },
+  emits: {
+    addItem: (item: Item) => item,
   },
 });
 </script>
@@ -11,7 +20,7 @@ export default defineComponent({
 <template>
   <header class="header">
     <h2 class="logo">Shop Basket</h2>
-    <TheForm />
+    <TheForm @add-item="addItem" />
   </header>
 </template>
 

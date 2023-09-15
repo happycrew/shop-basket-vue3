@@ -2,27 +2,57 @@
 import TheHeader from './components/TheHeader.vue';
 import TheTodoList from './components/TheTodoList.vue';
 import { defineComponent } from 'vue';
+import { Item } from './types/types';
+
+interface State {
+  basketItems: Item[];
+}
 
 export default defineComponent({
   components: {
     TheHeader,
     TheTodoList,
   },
-  data: () => ({
-    basketItems: [
-      { id: 0, text: 'Apples', completed: true },
-      { id: 1, text: 'Banana', completed: true },
-      { id: 2, text: 'Juice', completed: false },
-    ],
-    someTitle: 'random string',
-  }),
+  data(): State {
+    return {
+      basketItems: [],
+    };
+  },
+  methods: {
+    addItem(item: Item) {
+      this.basketItems.push(item);
+    },
+    toggleItem(id: string) {
+      const index = this.basketItems.findIndex(item => item.id === id);
+      if (index !== -1) {
+        this.basketItems[index].completed = !this.basketItems[index].completed;
+      }
+    },
+    removeItem(id: string) {
+      this.basketItems = this.basketItems.filter(
+        (elem: Item) => elem.id !== id,
+      );
+    },
+  },
+  computed: {
+    sortedBasketItems(): Item[] {
+      const copiedArr = [...this.basketItems];
+      console.log(copiedArr);
+      return copiedArr.sort((a, b) =>
+        a.completed === b.completed ? 0 : a.completed ? 1 : -1,
+      );
+    },
+  },
 });
 </script>
 
 <template>
-  <TheHeader />
-  <main class="main pt-5">
-    <TheTodoList :basketItems="basketItems" />
+  <TheHeader @add-item="addItem" />
+  <main class="main">
+    <TheTodoList
+      :basketItems="sortedBasketItems"
+      @toggle-item="toggleItem"
+      @remove-item="removeItem" />
   </main>
 </template>
 

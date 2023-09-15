@@ -7,22 +7,42 @@ export default defineComponent({
       type: Array as PropType<Item[]>,
     },
   },
+  methods: {
+    toggleItem(id: string) {
+      this.$emit('toggleItem', id);
+    },
+    removeItem(id: string) {
+      this.$emit('removeItem', id);
+    },
+  },
 });
 </script>
 
 <template>
-  <ul class="list">
+  <ul v-if="basketItems?.length !== 0" class="list">
     <li class="list__item" v-for="(item, id) in basketItems" :key="item.id">
       <span :class="{ 'list__item-done': item.completed }">
         {{ id + 1 }}. {{ item.text }}
       </span>
-      <button class="list__btn">Done</button>
+      <div class="list__item-btns">
+        <button @click="toggleItem(item.id)" class="list__btn list__btn-done">
+          Done
+        </button>
+        <button @click="removeItem(item.id)" class="list__btn list__btn-remove">
+          Remove
+        </button>
+      </div>
     </li>
   </ul>
+  <h1 class="empty" v-else>Basket is empty</h1>
 </template>
 
 <style lang="scss">
 @import '../assets/styles/variables.scss';
+
+.empty {
+  margin-top: 25%;
+}
 
 .list {
   list-style-type: none;
@@ -33,8 +53,9 @@ export default defineComponent({
     justify-content: space-between;
     margin-bottom: 5px;
 
-    &-number {
-      margin-right: 15px;
+    &-btns {
+      display: flex;
+      gap: 5px;
     }
 
     &-done {
@@ -42,6 +63,7 @@ export default defineComponent({
       opacity: 0.6;
     }
   }
+
   &__btn {
     align-self: center;
     background: $button-done-bg-color;
@@ -55,13 +77,30 @@ export default defineComponent({
     transition: all 200ms ease-in;
     cursor: pointer;
 
-    &:hover {
-      background: darken($button-done-bg-color, 8%);
+    &-done {
+      background: $button-done-bg-color;
+
+      &:hover {
+        background: darken($button-done-bg-color, 8%);
+      }
+
+      &:active {
+        background: $button-done-bg-color;
+        box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.2);
+      }
     }
 
-    &:active {
-      background: $button-done-bg-color;
-      box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    &-remove {
+      background: $button-remove-bg-color;
+
+      &:hover {
+        background: darken($button-remove-bg-color, 8%);
+      }
+
+      &:active {
+        background: $button-remove-bg-color;
+        box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.2);
+      }
     }
   }
 }
