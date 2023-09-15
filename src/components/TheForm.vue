@@ -1,39 +1,12 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
-import TheForm from './TheForm.vue';
-export default defineComponent({
-  components: {
-    TheForm,
-  },
-});
-</script>
-
 <template>
-  <header class="header">
-    <h2 class="logo">Shop Basket</h2>
-    <TheForm />
-  </header>
+  <form class="form">
+    <input type="text" class="form__input" placeholder="Input here..." />
+    <button type="button" class="form__btn form__btn--primary">Add</button>
+  </form>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import '../assets/styles/variables.scss';
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom-width: 1px;
-  background: #eeeeee;
-  box-shadow: $box-shadow;
-  padding: 0.95rem;
-}
-
-.logo {
-  margin-left: 1.95rem;
-}
-
 .form {
   display: flex;
   margin-right: 120px;
