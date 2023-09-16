@@ -42,6 +42,9 @@ export default defineComponent({
 
 .empty {
   margin-top: 25%;
+  @media screen and (max-width: 520px) {
+    font-size: 1.3rem;
+  }
 }
 
 .list {
@@ -56,6 +59,11 @@ export default defineComponent({
       font-size: 1.2em;
       width: 60%;
       word-break: break-all;
+      align-self: center;
+      @media screen and (max-width: 480px) {
+        font-size: 0.9em;
+
+      }
     }
 
     &-btns {
@@ -81,6 +89,12 @@ export default defineComponent({
     text-transform: uppercase;
     transition: all 200ms ease-in;
     cursor: pointer;
+
+    @media screen and (max-width: 480px) {
+      height: 25px;
+      padding: 0.45px;
+      font-size: 0.7rem;
+    }
 
     &-done {
       background: $button-done-bg-color;
