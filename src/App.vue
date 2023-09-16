@@ -18,20 +18,32 @@ export default defineComponent({
       basketItems: [],
     };
   },
+  created() {
+    const storedItems = localStorage.getItem('basketItems');
+    if (storedItems) {
+      this.basketItems = JSON.parse(storedItems);
+    }
+  },
   methods: {
     addItem(item: Item) {
       this.basketItems.push(item);
+      this.saveToLocalStorage();
     },
     toggleItem(id: string) {
       const index = this.basketItems.findIndex(item => item.id === id);
       if (index !== -1) {
         this.basketItems[index].completed = !this.basketItems[index].completed;
+        this.saveToLocalStorage();
       }
     },
     removeItem(id: string) {
       this.basketItems = this.basketItems.filter(
         (elem: Item) => elem.id !== id,
       );
+      this.saveToLocalStorage();
+    },
+    saveToLocalStorage() {
+      localStorage.setItem('basketItems', JSON.stringify(this.basketItems));
     },
   },
   computed: {

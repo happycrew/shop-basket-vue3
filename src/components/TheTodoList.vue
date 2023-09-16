@@ -21,7 +21,7 @@ export default defineComponent({
 <template>
   <ul v-if="basketItems?.length !== 0" class="list">
     <li class="list__item" v-for="(item, id) in basketItems" :key="item.id">
-      <span :class="{ 'list__item-done': item.completed }">
+      <span class="list__item-content" :class="{ 'list__item-done': item.completed }">
         {{ id + 1 }}. {{ item.text }}
       </span>
       <div class="list__item-btns">
@@ -47,11 +47,16 @@ export default defineComponent({
 .list {
   list-style-type: none;
   &__item {
-    font-size: 2em;
     text-align: left;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
+
+    &-content {
+      font-size: 1.2em;
+      width: 60%;
+      word-break: break-all;
+    }
 
     &-btns {
       display: flex;
