@@ -21,12 +21,14 @@ export default defineComponent({
 <template>
   <ul v-if="basketItems?.length !== 0" class="list">
     <li class="list__item" v-for="(item, id) in basketItems" :key="item.id">
-      <span class="list__item-content" :class="{ 'list__item-done': item.completed }">
+      <span
+        class="list__item-content"
+        :class="{ 'list__item-done': item.completed }">
         {{ id + 1 }}. {{ item.text }}
       </span>
       <div class="list__item-btns">
         <button @click="toggleItem(item.id)" class="list__btn list__btn-done">
-          Done
+          {{ item.completed ? 'Undone' : 'Done' }}
         </button>
         <button @click="removeItem(item.id)" class="list__btn list__btn-remove">
           Remove
@@ -62,7 +64,6 @@ export default defineComponent({
       align-self: center;
       @media screen and (max-width: 480px) {
         font-size: 0.9em;
-
       }
     }
 
