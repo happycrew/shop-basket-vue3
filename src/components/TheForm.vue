@@ -46,10 +46,14 @@ export default defineComponent({
 @import '../assets/styles/variables.scss';
 .form {
   display: flex;
-  margin-right: 120px;
+  margin-right: 2rem;
+
+  @media screen and (max-width: 720px) {
+    margin-right: 0;
+  }
 
   &__input {
-    width: 380px;
+    width: 420px;
     background: #fff;
     color: $input-text-color;
     font: inherit;
@@ -57,6 +61,14 @@ export default defineComponent({
     border: 0;
     outline: 0;
     padding: 0.75rem;
+
+    @media screen and (max-width: 720px) {
+      width: 300px;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 260px;
+    }
   }
 
   &__btn {

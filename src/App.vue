@@ -71,7 +71,6 @@ export default defineComponent({
 <style lang="scss">
 .main {
   margin: 0 auto;
-  min-width: 300px;
   max-width: 480px;
   min-height: 50vh;
   text-align: center;
@@ -83,5 +82,9 @@ export default defineComponent({
   margin-top: 7rem;
   padding-left: 2%;
   padding-right: 2%;
+
+  @media screen and (max-width: 480px) {
+    max-width: 280px;
+  }
 }
 </style>
