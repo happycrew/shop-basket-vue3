@@ -28,6 +28,9 @@ export default defineComponent({
 
   methods: {
     addItem() {
+      if (!this.itemText) {
+        return;
+      }
       this.$emit('addItem', {
         id: Date.now().toString(),
         text: this.itemText,
